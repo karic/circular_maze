@@ -6,13 +6,14 @@
 // https://en.wikipedia.org/wiki/Maze_generation_algorithm
 
 var cols=10;
-var rows=10;
+var rows=10; 
 var w = 40;
 var grid = [];
-var innerDonut = 10;
-var outsideDonut = 500;
+var innerDonut =  100;
+var outsideDonut = 400;
 var cellHeight=(outsideDonut - innerDonut)/rows;
 var cellWidth = (2 * Math.PI) / cols;
+
 
 
 
@@ -21,18 +22,18 @@ var current;
 var stack = [];
 
 function setup() {
-  createCanvas(600, 600);
+  ellipseMode(RADIUS);
+  createCanvas(1000, 1000);
   //cols = floor(width/w);
   //rows = floor(height/w);
   //frameRate(5);
   background(0);
 
-  var middle = createVector(height/2, width/2);
 
 
   for (var   j = 0; j < rows; j++) {
     for (var i = 0; i < cols; i++) {
-      var cell = new Cell(i, j, middle);
+      var cell = new Cell(i, j);
       grid.push(cell);
     }
   }

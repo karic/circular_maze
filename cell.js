@@ -5,13 +5,11 @@
 // Recursive backtracker
 // https://en.wikipedia.org/wiki/Maze_generation_algorithm
 
-function Cell(i, j, z) {
+function Cell(i, j) {
   this.i = i;
   this.j = j;
   this.walls = [true, true, true, true];
   this.visited = false;
-  var middle = this.z;
-
 
   this.checkNeighbors = function() {
     var neighbors = [];
@@ -60,26 +58,26 @@ function Cell(i, j, z) {
     noFill();
     if (this.walls[0]) {
 
-//      arc(width/2    , height/2    , innerDonut + (rows-i+1)*cellHeight, innerDonut + (rows-i+1)*cellHeight, j*cellWidth, (j+1)*cellWidth);
-    arc(width/2    , height/2    , innerDonut + (rows-i)*cellHeight, innerDonut + (rows-i)*cellHeight, j*cellWidth, (j+1)*cellWidth);
+      arc(width/2    , height/2    , innerDonut + (rows-j)*cellHeight, innerDonut + (rows-j)*cellHeight, i*cellWidth, (i+1)*cellWidth);
 
     }
     if (this.walls[1]) {
-    //  rotate(innerDonut + (rows-i)*cellHeight ,middle);
-    //  line(width/2 + i*cellHeight,height/2,width/2 + (i+1)*cellHeight,height/2);
-    //  rotate(-1*(innerDonut + (rows-i)*cellHeight) ,middle);
+      translate(width/2,height/2);
+      rotate(Math.PI/2 + i*cellWidth);
+      line(0,-(outsideDonut)+(j*cellHeight),0,-(outsideDonut)+((j+1)*cellHeight));
+      rotate(-(Math.PI/2 + i*cellWidth));
+      translate(-width/2,-height/2);
     }
     if (this.walls[2]) {
-//      arc(width/2    , height/2    , innerDonut + (rows-i)*cellHeight, innerDonut + (rows-i)*cellHeight, j*cellWidth, (j+1)*cellWidth);
-      arc(width/2    , height/2    , innerDonut + (rows-i+1)*cellHeight, innerDonut + (rows-i+1)*cellHeight, j*cellWidth, (j+1)*cellWidth);
+      arc(width/2    , height/2    , innerDonut + (rows-j-1)*cellHeight, innerDonut + (rows-j-1)*cellHeight, i*cellWidth, (i+1)*cellWidth);
 
     }
     if (this.walls[3]) {
-  //    rotate(innerDonut + (rows-i+1)*cellHeight ,middle);
-
-    //  line(width/2 + i*cellHeight,height/2,width/2 + (i+1)*cellHeight,height/2);
-
-      //  rotate(-1*(innerDonut + (rows-i+1)*cellHeight) ,middle);
+      translate(width/2,height/2);
+      rotate(Math.PI/2 + (i+1)*cellWidth);
+      line(0,-(outsideDonut)+(j*cellHeight),0,-(outsideDonut)+((j+1)*cellHeight));
+      rotate(-(Math.PI/2 + (i+1)*cellWidth));
+      translate(-width/2,-height/2);
     }
 
     if (this.visited) {
@@ -89,3 +87,6 @@ function Cell(i, j, z) {
     }
   }
 }
+// for (k=0;k<grid.length; k++) {
+// grid[k].walls = [false,false,false,false];
+// }
