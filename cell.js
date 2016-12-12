@@ -19,6 +19,12 @@ function Cell(i, j) {
     var bottom = grid[index(i, j+1)];
     var left   = grid[index(i-1, j)];
 
+    if (i==cols-1){
+    right = grid[index(0,j)];
+    }else if (i==0){
+    left = grid[index(cols-1,j)];
+    }
+
     if (top && !top.visited) {
       neighbors.push(top);
     }
@@ -38,7 +44,6 @@ function Cell(i, j) {
     } else {
       return undefined;
     }
-
 
   }
   this.highlight = function() {

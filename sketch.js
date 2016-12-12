@@ -6,7 +6,7 @@
 // https://en.wikipedia.org/wiki/Maze_generation_algorithm
 
 var cols=10;
-var rows=10; 
+var rows=10;
 var w = 40;
 var grid = [];
 var innerDonut =  100;
@@ -71,6 +71,7 @@ function draw() {
 
 }
 
+//We can try and loop around the maze here instead of ending at number of cols
 function index(i, j) {
   if (i < 0 || j < 0 || i > cols-1 || j > rows-1) {
     return -1;
