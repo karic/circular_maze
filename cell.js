@@ -19,11 +19,13 @@ function Cell(i, j) {
     var bottom = grid[index(i, j+1)];
     var left   = grid[index(i-1, j)];
 
-    if (i==cols-1){
-    right = grid[index(0,j)];
-    }else if (i==0){
-    left = grid[index(cols-1,j)];
-    }
+    //if (i+1==cols){
+    //right = grid[index(0,j)];
+      //console.log(right);
+    //}else if (i==0){
+   // left = grid[index(cols-1,j)];
+            //console.log(left);
+   // }
 
     if (top && !top.visited) {
       neighbors.push(top);
@@ -47,17 +49,21 @@ function Cell(i, j) {
 
   }
   this.highlight = function() {
+    noStroke();
+    fill(0, 0, 255, 100);
+    arc(width/2    , height/2    , innerDonut + (rows-j)*cellHeight, innerDonut + (rows-j)*cellHeight, i*cellWidth, (i+1)*cellWidth);
+    //fill(51);
   //  var x = this.i*w;
   //  var y = this.j*w;
   //  noStroke();
   //  fill(0, 0, 255, 100);
   //  rect(x, y, w, w);
-
+      //arc(width/2    , height/2    , innerDonut + (rows-j-1)*cellHeight, innerDonut + (rows-j-1)*cellHeight, i*cellWidth, (i+1)*cellWidth);
   }
 
   this.show = function() {
-    var x = this.i*w;
-    var y = this.j*w;
+    //var x = this.i*w;
+    //var y = this.j*w;
 
     stroke(255);
     noFill();
@@ -66,7 +72,7 @@ function Cell(i, j) {
       arc(width/2    , height/2    , innerDonut + (rows-j)*cellHeight, innerDonut + (rows-j)*cellHeight, i*cellWidth, (i+1)*cellWidth);
 
     }
-    if (this.walls[1]) {
+    if (this.walls[3]) {
       translate(width/2,height/2);
       rotate(Math.PI/2 + i*cellWidth);
       line(0,-(outsideDonut)+(j*cellHeight),0,-(outsideDonut)+((j+1)*cellHeight));
@@ -77,7 +83,7 @@ function Cell(i, j) {
       arc(width/2    , height/2    , innerDonut + (rows-j-1)*cellHeight, innerDonut + (rows-j-1)*cellHeight, i*cellWidth, (i+1)*cellWidth);
 
     }
-    if (this.walls[3]) {
+    if (this.walls[1]) {
       translate(width/2,height/2);
       rotate(Math.PI/2 + (i+1)*cellWidth);
       line(0,-(outsideDonut)+(j*cellHeight),0,-(outsideDonut)+((j+1)*cellHeight));
@@ -85,11 +91,11 @@ function Cell(i, j) {
       translate(-width/2,-height/2);
     }
 
-    if (this.visited) {
+    //if (this.visited) {
       //  noStroke();
       //fill(255, 0, 255, 100);
       //arc(height/2, width/2, w, w);
-    }
+    //}
   }
 }
 // for (k=0;k<grid.length; k++) {

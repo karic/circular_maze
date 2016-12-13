@@ -5,9 +5,8 @@
 // Recursive backtracker
 // https://en.wikipedia.org/wiki/Maze_generation_algorithm
 
-var cols=10;
+var cols=30;
 var rows=10;
-var w = 40;
 var grid = [];
 var innerDonut =  100;
 var outsideDonut = 400;
@@ -24,9 +23,7 @@ var stack = [];
 function setup() {
   ellipseMode(RADIUS);
   createCanvas(1000, 1000);
-  //cols = floor(width/w);
-  //rows = floor(height/w);
-  //frameRate(5);
+  //frameRate(1);
   background(0);
 
 
@@ -50,7 +47,7 @@ function draw() {
   }
 
   current.visited = true;
-  current.highlight();
+  //current.highlight();
   // STEP 1
   var next = current.checkNeighbors();
   if (next) {
@@ -59,6 +56,9 @@ function draw() {
     // STEP 2
     stack.push(current);
 
+    //console.log(current);
+    //console.log(next);
+    //console.log(stack);
     // STEP 3
     removeWalls(current, next);
 
@@ -71,7 +71,6 @@ function draw() {
 
 }
 
-//We can try and loop around the maze here instead of ending at number of cols
 function index(i, j) {
   if (i < 0 || j < 0 || i > cols-1 || j > rows-1) {
     return -1;
@@ -82,18 +81,20 @@ function index(i, j) {
 
 function removeWalls(a, b) {
   var x = a.i - b.i;
-  if (x === 1) {
+  //console.log(a.i);
+  if (x >= 1) {
     a.walls[3] = false;
     b.walls[1] = false;
-  } else if (x === -1) {
+  } else if (x <= -1) {
     a.walls[1] = false;
     b.walls[3] = false;
   }
   var y = a.j - b.j;
-  if (y === 1) {
+  //console.log(a.j);
+  if (y >= 1) {
     a.walls[0] = false;
     b.walls[2] = false;
-  } else if (y === -1) {
+  } else if (y <= -1) {
     a.walls[2] = false;
     b.walls[0] = false;
   }
