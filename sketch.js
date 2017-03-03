@@ -23,7 +23,6 @@ var stack = [];
 function setup() {
   ellipseMode(RADIUS);
   createCanvas(1000, 1000);
-  //frameRate(1);
   background(0);
 
 
@@ -35,7 +34,7 @@ function setup() {
     }
   }
 
-  current = grid[0];
+  current = grid[Math.floor(Math.random() * cols * rows + 1)];
 
 
 }
@@ -47,7 +46,6 @@ function draw() {
   }
 
   current.visited = true;
-  //current.highlight();
   // STEP 1
   var next = current.checkNeighbors();
   if (next) {
@@ -56,9 +54,6 @@ function draw() {
     // STEP 2
     stack.push(current);
 
-    //console.log(current);
-    //console.log(next);
-    //console.log(stack);
     // STEP 3
     removeWalls(current, next);
 
@@ -81,7 +76,7 @@ function index(i, j) {
 
 function removeWalls(a, b) {
   var x = a.i - b.i;
-  //console.log(a.i);
+  
   if (x >= 1) {
     a.walls[3] = false;
     b.walls[1] = false;
@@ -89,6 +84,16 @@ function removeWalls(a, b) {
     a.walls[1] = false;
     b.walls[3] = false;
   }
+  
+  if (a.i== 29 && b.i == 0){
+    a.walls[1] = false;
+    b.walls[3] = false;
+  } else if ( a.i==0 && b.i==29){
+    a.walls[3] = false;
+    b.walls[1] = false;
+  }
+
+
   var y = a.j - b.j;
   //console.log(a.j);
   if (y >= 1) {
